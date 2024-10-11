@@ -5,8 +5,6 @@ public class Functions {
     {
         //display title
         Title();
-        //display intro
-        Intro();
     }
 
     //method to send the user to the next part of the story
@@ -32,6 +30,8 @@ public class Functions {
     public static void Title()
     {
         System.out.println("Welcome to Auspicious Pancopticon!\n");
+        //display intro
+        Intro();
     }
 // fighting monsters in what is essentially a reality show
     public static void Intro()
@@ -56,8 +56,6 @@ public class Functions {
         String name = scan.nextLine();
         //greet user by name
         System.out.println(name+", eh? Good luck out there.");
-        //close scanner
-        scan.close();
         //prepForBattle
         prepareForAdventure();
         //return string
@@ -102,7 +100,6 @@ public class Functions {
         }
         else if(weaponChoice.equals("4"))
         {
-            System.out.println("\nBye!");
             playerChoice = "Exit";
         }
         else
@@ -110,13 +107,25 @@ public class Functions {
             System.out.println("\nPlease don't enter an invalid choice.");
             playerChoice = "prepareForAdventure";
         }
-        //close scanner
-        scan.close();
+        if (playerChoice == "prepareForAdventure")
+        {
+            prepareForAdventure();
+        }
+        else if (playerChoice == "Exit")
+        {
+            System.out.println("Bye!");
+        }
+        else
+        {
+            firstBattle();
+        }
         return playerChoice;
     }
 
     public static void firstBattle()
     {
         System.out.println("The recording drone hovers behind you, silently, at a height that was likely determined to be safe for it to fly at. It's free to use, not disposable. ");
+        System.out.println("The forest is covered by canopies, shadows and foliage making visibility nigh nonexistent, but, somehow, the drone was making do.");
+        System.out.println("You hear a twig *SNAP*, and dread overwhelms you as you start your first battle.");
     }
 }
