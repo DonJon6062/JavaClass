@@ -4,8 +4,7 @@ import java.util.Scanner;
 //create class
 public class Adventure 
 {
-
-static void golemType(int number)
+    static void golemType(int number)
 {
     if(number == 1)
     {
@@ -39,13 +38,12 @@ static boolean comboCheck(int unitOne, int unitTwo, int unitThree)
     }
     else
     {
-        return comboDone = true;
+        return comboDone = false;
     }
 }
 
-    //make main 
-    public static void main(String[] args) 
-    {
+public static void roundOne()
+{
         int playerPoints = 0; 
         int enemyPoints = 0;
         //vars for units
@@ -82,17 +80,33 @@ static boolean comboCheck(int unitOne, int unitTwo, int unitThree)
                 if(enemyPoints < 3)
                 {
                     {
-                        // set round number
-                        roundNumber += 1;
-                        System.out.println("Round " + roundNumber);
-                        // print units currently registered\
-                        System.out.println("You have recently played " + playerUnitOne + ", " + playerUnitTwo + ", " + playerUnitThree);
-                        System.out.println("Your opponent has played " + enemyUnitOne + ", " + enemyUnitTwo + ", " + enemyUnitThree);
-                        //player and enemy choice
-                        System.out.println("What do you want to play?\n1.Dinosaur \n(Beats Militiaman and Knight, loses to Caveman and Warrior)\n2.Caveman \n(Beats Dinosaur and Warrior, loses to Knight and Militiaman)\n3.Warrior \n(Beats Dinosaur and Knight, loses to Caveman and Militiaman)\n4.Knight \n(Beats Caveman and Militiaman, loses to Dinosaur and Warrior)\n5.Militiaman \n(Beats Caveman and Warrior, loses to Dinosaur and Knight)\nPlaying three units in ascending order or descending order gives an instant win! So does playing the asme unit thrice!\nYou have to win a round wuth the unit for it to be valid, however! Your opponent can do the same!");
-                        playedGolem = scan.nextInt();
-                        int random = (int)(Math.random() * 5 + 1);
-                        enemyGolem = random;
+                    enemyChoices enemyChoices = new enemyChoices();
+                    // set round number
+                    roundNumber += 1;
+                    System.out.println("Round " + roundNumber);
+                    // print units currently registered\
+                    System.out.println("You have recently played " + playerUnitOne + ", " + playerUnitTwo + ", " + playerUnitThree);
+                    System.out.println("Your opponent has played " + enemyUnitOne + ", " + enemyUnitTwo + ", " + enemyUnitThree);
+                    //player and enemy choice
+                    System.out.println("What do you want to play?\n1.Dinosaur \n(Beats Militiaman and Knight, loses to Caveman and Warrior)\n2.Caveman \n(Beats Dinosaur and Warrior, loses to Knight and Militiaman)\n3.Warrior \n(Beats Dinosaur and Knight, loses to Caveman and Militiaman)\n4.Knight \n(Beats Caveman and Militiaman, loses to Dinosaur and Warrior)\n5.Militiaman \n(Beats Caveman and Warrior, loses to Dinosaur and Knight)\nPlaying three units in ascending order or descending order gives an instant win! So does playing the same unit thrice!\nYou have to win a round with the unit for it to be valid, however! Your opponent can do the same!");
+                    playedGolem = scan.nextInt();
+                    
+                    int mostRecentPlayedUnit = 0;
+
+                    if(roundNumber == 1 || roundNumber == 4 || roundNumber == 7 || roundNumber == 10 || roundNumber == 13)
+                    {
+                        mostRecentPlayedUnit = playerUnitOne;
+                    }
+                    if(roundNumber == 2 || roundNumber == 5 || roundNumber == 8 || roundNumber == 11 || roundNumber == 14)
+                    {
+                        mostRecentPlayedUnit = playerUnitTwo;
+                    }
+                    if(roundNumber == 3 || roundNumber == 6 || roundNumber == 9 || roundNumber == 12 || roundNumber == 15)
+                    {
+                        mostRecentPlayedUnit = playerUnitThree;
+                    }
+
+                    enemyGolem = enemyChoices.enemyChoice(mostRecentPlayedUnit);
                     //Win/lose check and point allocation
                     if(enemyGolem == playedGolem)
                     {
@@ -667,4 +681,12 @@ static boolean comboCheck(int unitOne, int unitTwo, int unitThree)
     }   
     scan.close();      
 }
+
+//make main 
+public static void main(String[] args) 
+{
+    // play the first round
+    roundOne();
+}
+
 }
